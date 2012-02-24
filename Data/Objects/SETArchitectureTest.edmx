@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SETArchitectureTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SETArchitectureTestModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="SETArchitectureTestModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ApplicationTypes" EntityType="SETArchitectureTestModel.Store.ApplicationTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Servers" EntityType="SETArchitectureTestModel.Store.Servers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ServerTypes" EntityType="SETArchitectureTestModel.Store.ServerTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Applications_ApplicationTypes" Association="SETArchitectureTestModel.Store.FK_Applications_ApplicationTypes">
+            <End Role="ApplicationTypes" EntitySet="ApplicationTypes" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Servers_ServerTypes" Association="SETArchitectureTestModel.Store.FK_Servers_ServerTypes">
+            <End Role="ServerTypes" EntitySet="ServerTypes" />
+            <End Role="Servers" EntitySet="Servers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ApplicationTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationTypes">
+          <Key>
+            <PropertyRef Name="ApplicationTypeID" />
+          </Key>
+          <Property Name="ApplicationTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Servers">
+          <Key>
+            <PropertyRef Name="ServerID" />
+          </Key>
+          <Property Name="ServerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ServerName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ServerTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServerTypes">
+          <Key>
+            <PropertyRef Name="ServerTypeID" />
+          </Key>
+          <Property Name="ServerTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Applications_ApplicationTypes">
+          <End Role="ApplicationTypes" Type="SETArchitectureTestModel.Store.ApplicationTypes" Multiplicity="1" />
+          <End Role="Applications" Type="SETArchitectureTestModel.Store.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationTypes">
+              <PropertyRef Name="ApplicationTypeID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="ApplicationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Servers_ServerTypes">
+          <End Role="ServerTypes" Type="SETArchitectureTestModel.Store.ServerTypes" Multiplicity="1" />
+          <End Role="Servers" Type="SETArchitectureTestModel.Store.Servers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerTypes">
+              <PropertyRef Name="ServerTypeID" />
+            </Principal>
+            <Dependent Role="Servers">
+              <PropertyRef Name="ServerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SETArchitectureTestModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SETArchitectureTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="SETArchitectureTestModel.Application" />
+          <EntitySet Name="ApplicationTypes" EntityType="SETArchitectureTestModel.ApplicationType" />
+          <EntitySet Name="Servers" EntityType="SETArchitectureTestModel.Server" />
+          <AssociationSet Name="FK_Applications_ApplicationTypes" Association="SETArchitectureTestModel.FK_Applications_ApplicationTypes">
+            <End Role="ApplicationType" EntitySet="ApplicationTypes" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <EntitySet Name="ServerTypes" EntityType="SETArchitectureTestModel.ServerType" />
+          <AssociationSet Name="FK_Servers_ServerTypes" Association="SETArchitectureTestModel.FK_Servers_ServerTypes">
+            <End Role="ServerType" EntitySet="ServerTypes" />
+            <End Role="Server" EntitySet="Servers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+            <PropertyRef Name="ApplicationTypeID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="ApplicationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ApplicationType" Relationship="SETArchitectureTestModel.FK_Applications_ApplicationTypes" FromRole="Application" ToRole="ApplicationType" />
+        </EntityType>
+        <EntityType Name="ApplicationType">
+          <Key>
+            <PropertyRef Name="ApplicationTypeID" />
+          </Key>
+          <Property Name="ApplicationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="SETArchitectureTestModel.FK_Applications_ApplicationTypes" FromRole="ApplicationType" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="ServerID" />
+            <PropertyRef Name="ServerTypeID" />
+          </Key>
+          <Property Name="ServerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerName" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ServerTypeID" Nullable="false" />
+          <NavigationProperty Name="ServerType" Relationship="SETArchitectureTestModel.FK_Servers_ServerTypes" FromRole="Server" ToRole="ServerType" />
+        </EntityType>
+        <Association Name="FK_Applications_ApplicationTypes">
+          <End Type="SETArchitectureTestModel.ApplicationType" Role="ApplicationType" Multiplicity="1" />
+          <End Type="SETArchitectureTestModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationType">
+              <PropertyRef Name="ApplicationTypeID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServerType">
+          <Key>
+            <PropertyRef Name="ServerTypeID" />
+          </Key>
+          <Property Type="Int32" Name="ServerTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TypeName" Nullable="false" />
+          <NavigationProperty Name="Servers" Relationship="SETArchitectureTestModel.FK_Servers_ServerTypes" FromRole="ServerType" ToRole="Server" />
+        </EntityType>
+        <Association Name="FK_Servers_ServerTypes">
+          <End Type="SETArchitectureTestModel.ServerType" Role="ServerType" Multiplicity="1" />
+          <End Type="SETArchitectureTestModel.Server" Role="Server" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerType">
+              <PropertyRef Name="ServerTypeID" />
+            </Principal>
+            <Dependent Role="Server">
+              <PropertyRef Name="ServerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SETArchitectureTestModelStoreContainer" CdmEntityContainer="SETArchitectureTestEntities">
+          <EntitySetMapping Name="Applications"><EntityTypeMapping TypeName="SETArchitectureTestModel.Application"><MappingFragment StoreEntitySet="Applications">
+            <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="ApplicationTypeID" ColumnName="ApplicationTypeID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ApplicationTypes"><EntityTypeMapping TypeName="SETArchitectureTestModel.ApplicationType"><MappingFragment StoreEntitySet="ApplicationTypes">
+            <ScalarProperty Name="ApplicationTypeID" ColumnName="ApplicationTypeID" />
+            <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Servers"><EntityTypeMapping TypeName="SETArchitectureTestModel.Server"><MappingFragment StoreEntitySet="Servers">
+            <ScalarProperty Name="ServerTypeID" ColumnName="ServerTypeID" />
+                <ScalarProperty Name="ServerID" ColumnName="ServerID" />
+            <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ServerTypes">
+            <EntityTypeMapping TypeName="SETArchitectureTestModel.ServerType">
+              <MappingFragment StoreEntitySet="ServerTypes">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="ServerTypeID" ColumnName="ServerTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SETArchitectureTest">
+        <EntityTypeShape EntityType="SETArchitectureTestModel.Application" Width="1.625" PointX="0.5" PointY="0.625" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="SETArchitectureTestModel.ApplicationType" Width="1.875" PointX="2.875" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SETArchitectureTestModel.Server" Width="1.5" PointX="8.375" PointY="0.875" Height="1.7879850260416665" IsExpanded="true" />
+        <AssociationConnector Association="SETArchitectureTestModel.FK_Applications_ApplicationTypes" >
+          <ConnectorPoint PointX="2.875" PointY="1.547841796875" />
+          <ConnectorPoint PointX="2.125" PointY="1.547841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SETArchitectureTestModel.ServerType" Width="1.5" PointX="6.375" PointY="0.875" Height="1.5956835937499996" />
+        <AssociationConnector Association="SETArchitectureTestModel.FK_Servers_ServerTypes" >
+          <ConnectorPoint PointX="7.875" PointY="1.6728417968749998" />
+          <ConnectorPoint PointX="8.375" PointY="1.6728417968749998" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

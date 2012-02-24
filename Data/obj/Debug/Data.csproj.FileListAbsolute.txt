@@ -1,0 +1,6 @@
+C:\Projects\Autonomy\SETArchitecture\Data\bin\Debug\Data.dll.config
+C:\Projects\Autonomy\SETArchitecture\Data\bin\Debug\Data.dll
+C:\Projects\Autonomy\SETArchitecture\Data\bin\Debug\Data.pdb
+C:\Projects\Autonomy\SETArchitecture\Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\Autonomy\SETArchitecture\Data\obj\Debug\Data.dll
+C:\Projects\Autonomy\SETArchitecture\Data\obj\Debug\Data.pdb

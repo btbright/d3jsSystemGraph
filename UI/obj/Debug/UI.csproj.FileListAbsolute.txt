@@ -1,0 +1,7 @@
+C:\Projects\Autonomy\SETArchitecture\UI\bin\UI.dll
+C:\Projects\Autonomy\SETArchitecture\UI\bin\UI.pdb
+C:\Projects\Autonomy\SETArchitecture\UI\bin\Data.dll
+C:\Projects\Autonomy\SETArchitecture\UI\bin\Data.pdb
+C:\Projects\Autonomy\SETArchitecture\UI\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\Autonomy\SETArchitecture\UI\obj\Debug\UI.dll
+C:\Projects\Autonomy\SETArchitecture\UI\obj\Debug\UI.pdb

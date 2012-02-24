@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SETArchitectureTestModelStoreContainer" CdmEntityContainer="SETArchitectureTestEntities">
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="SETArchitectureTestModel.Application">
+        <MappingFragment StoreEntitySet="Applications">
+          <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ApplicationTypeID" ColumnName="ApplicationTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationTypes">
+      <EntityTypeMapping TypeName="SETArchitectureTestModel.ApplicationType">
+        <MappingFragment StoreEntitySet="ApplicationTypes">
+          <ScalarProperty Name="ApplicationTypeID" ColumnName="ApplicationTypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servers">
+      <EntityTypeMapping TypeName="SETArchitectureTestModel.Server">
+        <MappingFragment StoreEntitySet="Servers">
+          <ScalarProperty Name="ServerTypeID" ColumnName="ServerTypeID" />
+          <ScalarProperty Name="ServerID" ColumnName="ServerID" />
+          <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerTypes">
+      <EntityTypeMapping TypeName="SETArchitectureTestModel.ServerType">
+        <MappingFragment StoreEntitySet="ServerTypes">
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="ServerTypeID" ColumnName="ServerTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

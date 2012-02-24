@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SETArchitectureTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SETArchitectureTestModelStoreContainer">
+    <EntitySet Name="Applications" EntityType="SETArchitectureTestModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ApplicationTypes" EntityType="SETArchitectureTestModel.Store.ApplicationTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Servers" EntityType="SETArchitectureTestModel.Store.Servers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServerTypes" EntityType="SETArchitectureTestModel.Store.ServerTypes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Applications_ApplicationTypes" Association="SETArchitectureTestModel.Store.FK_Applications_ApplicationTypes">
+      <End Role="ApplicationTypes" EntitySet="ApplicationTypes" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Servers_ServerTypes" Association="SETArchitectureTestModel.Store.FK_Servers_ServerTypes">
+      <End Role="ServerTypes" EntitySet="ServerTypes" />
+      <End Role="Servers" EntitySet="Servers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="ApplicationID" />
+    </Key>
+    <Property Name="ApplicationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="ApplicationTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationTypes">
+    <Key>
+      <PropertyRef Name="ApplicationTypeID" />
+    </Key>
+    <Property Name="ApplicationTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Servers">
+    <Key>
+      <PropertyRef Name="ServerID" />
+    </Key>
+    <Property Name="ServerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ServerName" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="ServerTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServerTypes">
+    <Key>
+      <PropertyRef Name="ServerTypeID" />
+    </Key>
+    <Property Name="ServerTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_Applications_ApplicationTypes">
+    <End Role="ApplicationTypes" Type="SETArchitectureTestModel.Store.ApplicationTypes" Multiplicity="1" />
+    <End Role="Applications" Type="SETArchitectureTestModel.Store.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationTypes">
+        <PropertyRef Name="ApplicationTypeID" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="ApplicationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Servers_ServerTypes">
+    <End Role="ServerTypes" Type="SETArchitectureTestModel.Store.ServerTypes" Multiplicity="1" />
+    <End Role="Servers" Type="SETArchitectureTestModel.Store.Servers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServerTypes">
+        <PropertyRef Name="ServerTypeID" />
+      </Principal>
+      <Dependent Role="Servers">
+        <PropertyRef Name="ServerTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
